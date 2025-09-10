@@ -18,7 +18,7 @@ body {
 
 
   header {
-    padding: 40px 0;
+    padding: 40px;
   }
 
   h1,
@@ -38,12 +38,15 @@ body {
   }
 
   main {
+    padding: 40px;
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
     gap: 40px;
   }
 
   section {
-    width: 400px;
+    width: 350px;
     min-height: 65vh;
     background-color: $background;
     padding: 40px;
@@ -164,6 +167,148 @@ body {
       padding: 0 10px;
       background-color: $accent;
       color: $text;
+    }
+  }
+
+}
+
+.memory-game {
+  .cards-container {
+    width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+
+    .image-container {
+      background-color: $accent-2;
+      z-index: 99999999;
+      height: 80px;
+      width: 80px;
+    }
+
+    img {
+      width: 80px;
+      height: 80px;
+      filter: opacity(100%);
+      transition: filter 0.5s;
+
+      &.hidden {
+        filter: opacity(0%);
+      }
+
+      &.matched {
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+.coin-flip {
+  *,
+*:after,
+*:before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+  perspective: 500px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+
+  .euro {
+
+  }
+
+  .container {
+    width: 10em;
+    height: 10em;
+    position: relative;
+    perspective: 300px;
+    margin: 2em;
+    transform: translateZ(-0.4em);
+  }
+
+  .coin {
+        --face: #0066ff;
+    --sign: #c49a44;
+    --circle: #c49a44;
+    --side: #dbb765;
+    --slide: #c49a44;
+    width: 98%;
+    height: 98%;
+    position: absolute;
+    transform-style: preserve-3d;
+    animation: spinEuro 50s -3s linear infinite;
+  }
+
+  .face {
+    border-radius: 5em;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: var(--face);
+  }
+
+  .front {
+    transform: translate3d(0, 0, 0.4em) rotateY(0);
+  }
+
+  .back {
+    transform: rotateY(180deg) translate3d(0, 0, 0.4em);
+  }
+
+  .image-container {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    img {
+      margin: 10%;
+      padding: 3px;
+      width: 80%;
+      height: 80%;
+      border-radius: 50%;
+      border: 0.2em dashed var(--circle);
+    }
+  }
+
+  .side {
+    width: 0.8em;
+    height: 3px;
+    background: var(--side);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    backface-visibility: hidden;
+  }
+
+  @for $i from 1 through 180 {
+    figure:nth-of-type(#{$i}) {
+      transform: translate3d(-50%, -50%, 0) rotateY(90deg) rotateX(($i - 1) * 2deg) translateZ(4.9em);
+    }
+  }
+
+
+
+  @keyframes spinEuro {
+    0% {
+      transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+
+    50% {
+      transform: rotateX(5 * 360deg) rotateY(45deg) rotateZ(25deg);
+    }
+
+    100% {
+      transform: rotateX(10 * 360deg) rotateY(0deg) rotateZ(0deg);
     }
   }
 
